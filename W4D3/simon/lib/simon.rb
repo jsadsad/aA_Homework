@@ -1,4 +1,4 @@
-require 'byebug'
+require 'colorize'
 
 class Simon
   COLORS = %w(red blue green yellow)
@@ -12,10 +12,14 @@ class Simon
   end
 
   def play
+    system("clear")
+    puts "Hello, let's play Simon!"
+    sleep 0.5
     until @game_over
       take_turn
       system("clear")
     end
+    puts "The sequence was #{@seq}".colorize(:light_black)
     game_over_message
     reset_game
   end
@@ -23,33 +27,42 @@ class Simon
   def take_turn
     show_sequence
     require_sequence
+
     unless @game_over
       round_success_message
+      sleep 1
       @sequence_length += 1
     end
-    take_turn
   end
 
   def show_sequence
     add_random_color
     @seq.each do |color|
-      puts color
-      sleep 0.50
+      case color
+      when "blue"
+        puts "The color is " + "#{color}".colorize(:light_blue) + "."
+      when "red"
+        puts "The color is " + "#{color}".colorize(:light_red) + "."
+      when "yellow"
+        puts "The color is " + "#{color}".colorize(:light_yellow) + "."
+      when "green"
+        puts "The color is " + "#{color}".colorize(:light_green) + "."
+      end
+      3.times do
+        puts "...".colorize(:red)
+        sleep 0.50
+      end
       system("clear")
-      sleep 0.50
     end
   end
 
   def require_sequence
-    puts "Repeat the sequence"
-    answers = Array.new
-    @seq.each do |color|
-      user_color = gets.chomp
-      if color != user_color
-        @game_over = true
-        break
-      end
+    puts "Enter the Colors in the sequence they appear in: ".colorize(:light_magenta)
+    user_color = gets.chomp.strip.downcase
+    if @seq.join(" ") != user_color
+      @game_over = true
     end
+    system("clear")
     sleep 0.25
   end
 
@@ -59,11 +72,11 @@ class Simon
   end
 
   def round_success_message
-    puts "Round success!"
+    puts "Round success!".colorize(:light_magenta)
   end
 
   def game_over_message
-    puts "Game over! You made #{sequence_length - 1} round."
+    puts "Game Over! You made #{sequence_length - 1} round(s)!".colorize(:light_green)
   end
 
   def reset_game
@@ -71,6 +84,7 @@ class Simon
     @game_over = false
     @seq = []
   end
+  
 end
 
 new_game = Simon.new
