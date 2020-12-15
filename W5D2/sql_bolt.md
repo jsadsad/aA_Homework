@@ -44,6 +44,7 @@ WHERE year NOT BETWEEN 2000 AND 2010;`
 WHERE year <= 2003;`
 
 # tasks
+
 1. Find all the Toy Story movies
 `SELECT * FROM movies
 WHERE title LIKE "%Toy%";`
@@ -56,3 +57,23 @@ WHERE director != "John Lasseter"`
 4. Find all the WALL-* movies
 `SELECT * FROM movies
 WHERE title LIKE "%WALL%"`
+
+# filtering and sorting
+1. List all directors of Pixar movies (alphabetically), without duplicates
+`SELECT DISTINCT director
+FROM movies
+ORDER BY director ASC;`
+2. List the last four Pixar movies released (ordered from most recent to least)
+`SELECT DISTINCT director
+FROM movies
+ORDER BY director ASC;`
+3. List the first five Pixar movies sorted alphabetically
+`SELECT title, year FROM movies
+ORDER BY title ASC
+LIMIT 5;`
+4. List the next five Pixar movies sorted alphabetically
+`SELECT title FROM movies
+ORDER BY title ASC
+LIMIT 5 OFFSET 5;`
+
+# simple select
