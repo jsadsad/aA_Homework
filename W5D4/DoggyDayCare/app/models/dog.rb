@@ -1,3 +1,10 @@
+# == Schema Information
+#
+# Table name: dogs
+#
+#  id   :bigint           not null, primary key
+#  name :string           not null
+#
 class Dog < ApplicationRecord
   validates :name, presence: true
   validate :check_name_length

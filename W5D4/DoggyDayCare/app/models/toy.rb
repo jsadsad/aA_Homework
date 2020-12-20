@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: toys
+#
+#  id         :bigint           not null, primary key
+#  color      :string           not null
+#  name       :string           not null
+#  created_at :datetime
+#  updated_at :datetime
+#  dog_id     :integer          not null
+#
 class Toy < ApplicationRecord
   def dog
     Dog.find(dog_id)
