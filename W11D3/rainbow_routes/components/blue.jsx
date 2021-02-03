@@ -9,7 +9,8 @@ class Blue extends React.Component {
       <div>
         <h2 className="blue"></h2>
         {/* Links here */}
-
+        <Link to='/blue' >Blue only</Link>
+        <Link to='/blue/indigo' >Add indigo</Link>
         {/* Routes here */}
         <Route path="/blue/indigo" component={Indigo} />
       </div>
